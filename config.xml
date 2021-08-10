@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.obligatorio.taller.pinta.rico" 
+version="1.0.0" xmlns="http://www.w3.org/ns/widgets" 
+xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Pinta Rico</name>
+    <description>
+        Aplicacion para el taller de desarrollo de aplicaciones mobiles, julio 2021.
+    </description>
+    <author email="spereirarivero93@gmail.com" href="">
+        Sebastian Pereira
+    </author>
+
+    <plugin name="cordova-plugin-qrscanner" spec= "3.0.1" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.2" />   
+    <plugin name="cordova-plugin-splashscreen" spec="~5.0.3" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.2" />
+
+    <param name="android-package" value="kr.co.joycorp.cordova.exitapp" />
+    
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application usesCleartextTraffic="true" />
+        </edit-config>
+
+        
+        <preference name="SplashMaintainAspectRatio" value="true"/>
+        <icon density="ldpi" src="res/icon/android/ldpi.png"/>
+        <icon density="mdpi" src="res/icon/android/mdpi.png"/>
+        <icon density="hdpi" src="res/icon/android/hdpi.png"/>
+        <icon density="xhdpi" src="res/icon/android/xhdpi.png"/>
+        <icon density="xxhdpi" src="res/icon/android/xxhdpi.png"/>
+        <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png"/>
+        <!-- Portrait -->
+        <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png"/>
+        <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png"/>
+        <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png"/>
+        <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png"/>
+        <splash density="port-xxhdpi" src="res/screen/android/splash-port-xxhdpi.png"/>
+        <splash density="port-xxxhdpi" src="res/screen/android/splash-port-xxxhdpi.png"/>
+
+        
+    </platform>
+</widget>

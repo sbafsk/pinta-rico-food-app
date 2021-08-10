@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ONSEN UI -->
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/onsenui/css/onsen-css-components.min.css"
+    />
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <!-- LEAFLET  -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+
+    <script type="text/javascript" src="./src/scripts/jquery.js" defer></script>
+    <script type="text/javascript" src="./src/scripts/index.js" defer></script>
+    <script src="cordova.js"></script>
+    <link rel="stylesheet" href="./src/style/index.css" />
+
+    <title>Pinta Rico</title>
+  </head>
+  <body>
+    <ons-modal id="spinnerModal">
+      <div style="text-align: center">
+        <p>
+          <ons-icon icon="md-spinner" size="42px" spin></ons-icon>
+        </p>
+      </div>
+    </ons-modal>
+
+    <ons-navigator swipeable id="nav" page="login.html"> </ons-navigator>
+
+    <template id="nav.html">
+      <ons-page>
+        <ons-tabbar swipeable position="bottom">
+          <ons-tab page="home.html" label="Home" icon="fa-home"> </ons-tab>
+          <ons-tab page="products.html" label="Productos" icon="fa-utensils">
+          </ons-tab>
+          <ons-tab page="favorites.html" label="Favoritos" icon="fa-star">
+          </ons-tab>
+          <ons-tab page="myOrders.html" label="Mis Pedidos" icon="fa-receipt">
+          </ons-tab>
+        </ons-tabbar>
+      </ons-page>
+    </template>
+
+    <template id="login.html">
+      <ons-page id="loginPage">
+        <div id="divLogin" style="text-align: center; margin: 20% 13%">
+          <p style="margin-bottom: 10%">
+            <img
+              class="logo"
+              src="./src/assets/img/logo.png"
+              alt=""
+              width="80%"
+            />
+          </p>
+          <p style="margin-bottom: 10%">
+            <ons-input
+              style="width: 100%"
+              id="txtCorreo"
+              modifier="underbar"
+              placeholder="Correo"
+              float
+            ></ons-input>
+          </p>
+          <p style="margin-bottom: 15%">
+            <ons-input
+              style="width: 100%"
+              id="txtPassword"
+              modifier="underbar"
+              type="password"
+              placeholder="Password"
+              float
+            ></ons-input>
+          </p>
+          <p style="margin-top: 30px">
+            <ons-button onclick="loginHandler()" modifier="large"
+              >Ingresar</ons-button
+            >
+          </p>
+          <p style="margin-top: 30px">
+            <ons-button modifier="quiet" onclick="goToRegister()"
+              >Registrarme</ons-button
+            >
+          </p>
+        </div>
+      </ons-page>
+    </template>
+
+    <template id="register.html">
+      <ons-page id="registroPage">
+        <div id="divRegistro" style="text-align: center; margin-top: 30%">
+          <p>
+            <ons-input
+              id="txtNombre"
+              modifier="underbar"
+              placeholder="Nombre"
+              float
+            ></ons-input>
+          </p>
+          <p>
+            <ons-input
+              id="txtApellido"
+              modifier="underbar"
+              placeholder="Apellido"
+              float
+            ></ons-input>
+          </p>
+          <p>
+            <ons-input
+              id="txtCorreo"
+              modifier="underbar"
+              placeholder="Correo"
+              float
+            ></ons-input>
+          </p>
+          <p>
+            <ons-input
+              id="txtDireccion"
+              modifier="underbar"
+              placeholder="Dirección"
+              float
+            ></ons-input>
+          </p>
+          <p>
+            <ons-input
+              id="txtPassword"
+              modifier="underbar"
+              type="password"
+              placeholder="Password"
+              float
+            ></ons-input>
+          </p>
+          <p style="margin-top: 30px">
+            <ons-button onclick="registerHandler()">Registrarme</ons-button>
+          </p>
+          <p style="margin-top: 30px">
+            <ons-button modifier="quiet" onclick="goToLogin()"
+              >Ir al Login</ons-button
+            >
+          </p>
+        </div>
+      </ons-page>
+    </template>
+
+    <template id="home.html">
+      <ons-page name="homePage">
+        <ons-toolbar>
+          <div class="center">Home</div>
+          <div class="right">
+            <ons-toolbar-button
+              icon="fa-sign-out-alt"
+              onclick="logout()"
+            ></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <div id="divHome" style="text-align: center; margin: 20% 13%">
+          <img
+            style="border-radius: 10%"
+            src="./src/assets/img/logo.png"
+            alt=""
+            width="80%"
+          />
+          <ons-card style="margin-top: 30%">
+            <div class="title">Pinta Rico</div>
+            <p>
+              La app para pedir deliciosas comidas a tu restaurante favorito.
+            </p>
+          </ons-card>
+        </div>
+      </ons-page>
+    </template>
+
+    <template id="products.html">
+      <ons-page>
+        <script>
+          ons.getScriptPage().onShow = getProducts;
+        </script>
+        <ons-toolbar>
+          <div class="center">Productos</div>
+          <div class="right">
+            <ons-toolbar-button
+              icon="fa-sign-out-alt"
+              onclick="logout()"
+            ></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <div id="product-filter">
+          <div>
+            <ons-search-input
+              placeholder="Nombre producto..."
+            ></ons-search-input>
+            <ons-button
+              id="searchBtn"
+              modifier="light"
+              onclick="productFilter()"
+            >
+              Buscar
+            </ons-button>
+            <ons-button modifier="quiet" onclick="scanQr()">
+              <ons-icon icon="fa-camera"></ons-icon>
+            </ons-button>
+          </div>
+          <div>
+            <span>Etiquetas: </span>
+            <ons-select
+              placeholder="Seleccionar"
+              id="tags-select"
+              onchange="filterByTags()"
+            ></ons-select>
+          </div>
+        </div>
+        <div id="product-list"></div>
+      </ons-page>
+    </template>
+
+    <template id="details.html">
+      <ons-page>
+        <script>
+          ons.getScriptPage().onShow = loadDetails;
+        </script>
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button></ons-back-button>
+          </div>
+          <div class="center">Detalle</div>
+        </ons-toolbar>
+        <div id="product-details"></div>
+      </ons-page>
+    </template>
+
+    <template id="createOrder.html">
+      <ons-page>
+        <script>
+          ons.getScriptPage().onShow = loadCreateOrderDetails;
+        </script>
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button></ons-back-button>
+          </div>
+          <div class="center">Crear Pedido</div>
+        </ons-toolbar>
+        <div id="order-details"></div>
+      </ons-page>
+    </template>
+
+    <template id="myOrders.html">
+      <ons-page>
+        <script>
+          ons.getScriptPage().onShow = getOrders;
+        </script>
+        <ons-toolbar>
+          <div class="center">Mis Pedidos</div>
+          <div class="right">
+            <ons-toolbar-button
+              icon="fa-sign-out-alt"
+              onclick="logout()"
+            ></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <div id="order-list"></div>
+      </ons-page>
+    </template>
+
+    <template id="favorites.html">
+      <ons-page>
+        <script>
+          ons.getScriptPage().onShow = getFavorites;
+        </script>
+        <ons-toolbar>
+          <div class="center">Favoritos</div>
+          <div class="right">
+            <ons-toolbar-button
+              icon="fa-sign-out-alt"
+              onclick="logout()"
+            ></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+        <div id="favoriteList"></div>
+      </ons-page>
+    </template>
+
+    <template id="qr-scan-page.html">
+      <ons-page id="scan-page">
+        <script>
+          ons.getScriptPage().onInit = scanQr;
+        </script>
+
+        <ons-toolbar>
+          <div class="left">
+            <ons-back-button
+              id="back-scan"
+              onclick="scanPageBack()"
+            ></ons-back-button>
+          </div>
+          <div class="center">Scan</div>
+        </ons-toolbar>
+        <div style="height: 100%; display: flex">
+          <img
+            src="./src/assets/img/qrcode.png"
+            style="width: 75%; display: block; margin: auto"
+          />
+        </div>
+      </ons-page>
+    </template>
+
+    <template id="offline.html">
+      <ons-page id="offlinePage">
+        <div style="height: 100%; display: flex">
+          <img
+            src="./src/assets/img/no-internet.png"
+            style="width: 75%; display: block; margin: auto"
+          />
+        </div>
+      </ons-page>
+    </template>
+  </body>
+</html>

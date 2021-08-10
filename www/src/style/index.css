@@ -1,0 +1,121 @@
+body {
+  background-color: white;
+}
+
+.logo {
+  border-radius: 10%;
+}
+
+#product-list {
+  margin-top: 90px;
+}
+
+.product-list-card {
+  border: 1px solid #ccc;
+  border-radius: 5%;
+  margin: 5% 10%;
+  box-shadow: #666 5px 5px 20px;
+  text-align: center;
+}
+
+.product-list-card img {
+  width: 50%;
+  height: auto;
+}
+
+.product-detail-card {
+  border: 2px solid #ccc;
+  border-radius: 2%;
+  margin: 0 5%;
+  box-shadow: #666 5px 5px 20px;
+  text-align: center;
+}
+
+.product-detail-card img {
+  width: 90%;
+  height: auto;
+}
+
+.product-order-card {
+  border: 2px solid #ccc;
+  border-radius: 2%;
+  margin: 0 5%;
+  box-shadow: #666 5px 5px 20px;
+  text-align: center;
+}
+
+.product-order-card img {
+  width: 70%;
+  height: auto;
+}
+
+.product-order-card input {
+  width: 10%;
+}
+
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5%;
+}
+
+#mapId {
+  height: 270px;
+  margin-top: 20px;
+}
+
+.fav {
+  color: red;
+  margin-left: 80%;
+}
+
+.no-fav {
+  color: gray;
+  margin-left: 80%;
+}
+
+#msgFav {
+  width: 80%;
+  height: auto;
+  margin: 60% auto;
+  font-size: large;
+  border: 1px solid gray;
+  border-radius: 5%;
+}
+
+#msgFav ons-icon {
+  position: absolute;
+  margin: 0 auto;
+}
+
+#product-filter {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  background-color: #eee;  
+  z-index: 999;
+}
+
+#product-filter * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#product-filter #searchBtn {
+  height: 2rem;
+  line-height: 1.5rem;
+  margin: 0 2%;
+}
+
+#product-filter #tags-select {
+  margin: 0 5%;
+}
+
+.transparent {
+  background-color: transparent !important;
+  
+}
